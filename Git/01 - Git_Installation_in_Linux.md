@@ -74,7 +74,7 @@ Open our GitHub Account go to settings under settings click on  SSH and GPG keys
 
 8. We will click on New SSH key and add title and then paste the copied key in the space provided.
 Now we will click on add SSH key
-![ssh key](ssh.jpg)
+![screenshot](ssh.jpg)
 
 9. Now use the below command to test the SSH key and press Enter after hit the below command.
     ~~~
