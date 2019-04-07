@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  nginx:
+    image: nginx
+    ports:
+    - 9090:80
+
+  wordpress:
+    image: wordpress
+    ports: 
+    - 90:80
+  
+  redis:
+    image: redis
+  
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+  
+    
