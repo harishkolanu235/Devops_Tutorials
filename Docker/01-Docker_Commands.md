@@ -38,7 +38,7 @@
 
 7. To run the images as container with detach mode
     ~~~
-    # docker  run  -itd  --name <container_name>   <img_name>   
+    # docker  run  -d  --name <container_name>   <img_name>   
     Ex:  # docker  run  -d  --name  ubuntu_cnt2  ubuntu  
     ~~~
 
@@ -50,124 +50,147 @@
     *Note:* To exit the container as well as still runnig the container.
     press ctr + p + q
 
-9. To run the image as container with port
+9. To run the image as container with specific port
     ~~~
     # docker  run  -it  --name  <container_name>   -p  81:80  <img_name>
     ~~~
     *Note:* -p <host_machine_port> : <container_port>
 
-10. To run the image as container with hostname
+10. To run the image as container with random port
+    ~~~
+    # docker  run  -it  --name  <container_name>   -P  <img_name>
+    ~~~
+
+11. To run the image as container with hostname
     ~~~
     # docker run -it --name <c_name> -h  <host_name>  <image_name>
     Ex: docker run -it --name  ubuntu1 -h training ubuntu  
     ~~~
     
-11. Run the command in container without attach to container
+12. Run the command in container without attach to container
     ~~~
     # docker exec  <cname> ls <path>
     Ex: # docker exec ubuntu-cnt2 ls /etc/
     ~~~
 
-12. Attache the container with particular user
+13. Attache the container with particular user
     ~~~
     # docker exec -it <c_id> -u <user_name> /bin/bash 
     ~~~
-13. To display the Docker running Containers.
-    ~~~
-    # docker  ps
-    ~~~
-	
 
-14. To Display the all the containers ether running or stop.
+14. To display the Docker running Containers.
     ~~~
-    # docker  ps  -a
+    # docker container ps 
     ~~~
 
-15. To stop the container
+15. To Display the all the containers ether running or stop.
     ~~~
-    # docker  stop  <cid>
+    # docker container ps  -a
     ~~~
 
-16. To start the already existed container
+16. To Display the particular number of the containers ether running or stop.
     ~~~
-    # docker start  <cid>
+    # docker container ps -n 2
     ~~~
-17. To delete the images
+
+17. To stop the container
+    ~~~
+    # docker container stop  <cid>
+    ~~~
+
+18. To start the already existed container
+    ~~~
+    # docker container start  <cid>
+    ~~~
+19. To delete the images
     ~~~
     # docker rmi  <img_name>
     ~~~
 
-18. To delete all the images
+20. To delete all the images
     ~~~
     # docker rmi  $(docker images -q)
     ~~~
  
-19. To delete the container
+21. To delete the container
     ~~~
     # docker rm  <cid>
     ~~~
 
-20. To delete all the running container
+22. To delete all the running container
+  
     ~~~
     # docker rm  $(docker ps  -q)  --force
     ~~~
 
-21. To delete all the container weather running or not
+23. To delete all the container weather running or not
     ~~~
     # docker rm  $(docker ps  -a -q)  --force 
     or
     # docker container prune
     ~~~
 
-22. to pause the processes in a running container.
+24. to pause the processes in a running container.
     ~~~
     # docker  pause  <cid>  or  <cname>
     ~~~
 
-23. to unpause the processes in a running container.
+25. to unpause the processes in a running container.
     ~~~
     # docker  unpause  <cid>  or  <cname>
     ~~~
-24. To see the processes within a container
+26. To see the processes within a container
     ~~~
     # docker  top  <cid>  or  <cname>
     ~~~
 
-25. to run a contaner with memory
+27. to run a contaner with memory
     ~~~
-    # docker run -itd -m 300M centos
+    # docker run -d -m 300M centos
     ~~~
 
-26. To see the statistics of running containers
+28. To see the statistics of running containers
     ~~~
     # docker stats  <cid>
     ~~~
 
-27. To see the full information of containers
+29. To see the full information of containers
     ~~~
     # docker inspect  <c_id>
     ~~~
 
-28. To know the logs of container
+30. To know the logs of container
     ~~~
-    # docker log <c_id>
+    # docker logs <c_id>
     ~~~
+
+31. To know the comtinous logs of container
+    ~~~
+    # docker logs <c_id> -f
+    ~~~
+
+32. To know the docker information
+    ~~~
+    # docker system info
+    ~~~
+
+33. To change the container name
+    ~~~
+    # docker rename <old_name> <new_name>
+    ~~~ 
+
+34. To copy a file to container
+    ~~~
+    # docker container cp <file_path> <container_id>:<dest_path>
+    ~~~ 
 
 #### Connect db to container
 1. run one db
     ~~~
-    # docker run -itd --name mydb -e MYSQL_ROOT_PASSWORD=root123 mysql
+    # docker run -d --name mydb -e MYSQL_ROOT_PASSWORD=root123 mysql
     ~~~
 2. run one webapp container 
     ~~~
-    # docker run -itd --name wordpress2 --link mydb:mysql -p 90:80 wordpress
+    # docker run -d --name wordpress2 --link mydb:mysql -p 90:80 wordpress
     ~~~
   
-
-
-
-
-
-
-    	
-
