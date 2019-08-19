@@ -46,5 +46,5 @@
 
 #### To share a volume from one container to another
    ~~~
-   # docker run -it --volume-from <c_id> ubuntu
+   # docker run -it --volumes-from <c_id> ubuntu
    ~~~
