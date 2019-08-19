@@ -44,12 +44,12 @@
     Ex:  # docker  run  -d  --name  ubuntu_cnt2  ubuntu  
     ~~~
 
-8. To entering the container
+8. Entering into the container
     ~~~
     # docker  attach  <cid> or <name>
     Ex: # docker attach ubuntu_cnt2
     ~~~
-    *Note:* To exit the container as well as still runnig the container.
+    *Note:* To exit from the container without stoping the container.
     press ctr + p + q
 
 9. To run the image as container with specific port
