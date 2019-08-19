@@ -41,7 +41,7 @@
 
 #### To share a volume or an directory to container
    ~~~
-   # docker run -it --name ubuntu3 -v /opt/test:/op/ ubuntu
+   # docker run -it --name ubuntu3 -v /opt/test:/opt/ubuntu
    ~~~
 
 #### To share a volume from one container to another
