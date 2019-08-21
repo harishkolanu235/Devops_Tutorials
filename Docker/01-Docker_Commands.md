@@ -161,17 +161,17 @@
     # docker history <image_name>
     ~~~
     
-32. Inspect changes to files or directories on a container’s filesystem
+30. Inspect changes to files or directories on a container’s filesystem
     ~~~
     # docker diff  <c_id>
     ~~~
     
-30. To see the statistics of running containers
+31. To see the statistics of running containers
     ~~~
     # docker stats  <cid>
     ~~~
 
-31. To see the full information of containers
+32. To see the full information of containers
     ~~~
     # docker inspect  <c_id>
     ~~~
