@@ -165,28 +165,43 @@
     ~~~
     # docker inspect  <c_id>
     ~~~
+ 
+31. Inspect changes to files or directories on a container’s filesystem
+    ~~~
+    # docker diff  <c_id>
+    ~~~
 
-31. To know the logs of container
+32. Show the history of an image
+    ~~~
+    # docker history <image_name>
+    ~~~
+
+33. Save one or more images to a tar archive
+    ~~~
+    # docker save -o  <tar_file_path> <image_name>
+    ~~~
+
+33. To know the logs of container
     ~~~
     # docker logs <c_id>
     ~~~
 
-32. To know the comtinous logs of container
+34. To check the continous logs of container
     ~~~
     # docker logs <c_id> -f
     ~~~
 
-33. To know the docker information
+35. To know the docker information
     ~~~
     # docker system info
     ~~~
 
-34. To change the container name
+36. To change the container name
     ~~~
     # docker rename <old_name> <new_name>
     ~~~ 
 
-35. To copy a file to container
+37. To copy a file to container
     ~~~
     # docker container cp <file_path> <container_id>:<dest_path>
     ~~~ 
