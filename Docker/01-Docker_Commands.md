@@ -156,24 +156,24 @@
     # docker run -d -m 300M centos
     ~~~
 
-29. To see the statistics of running containers
+29. Show the history of an image
+    ~~~
+    # docker history <image_name>
+    ~~~
+    
+32. Inspect changes to files or directories on a container’s filesystem
+    ~~~
+    # docker diff  <c_id>
+    ~~~
+    
+30. To see the statistics of running containers
     ~~~
     # docker stats  <cid>
     ~~~
 
-30. To see the full information of containers
+31. To see the full information of containers
     ~~~
     # docker inspect  <c_id>
-    ~~~
- 
-31. Inspect changes to files or directories on a container’s filesystem
-    ~~~
-    # docker diff  <c_id>
-    ~~~
-
-32. Show the history of an image
-    ~~~
-    # docker history <image_name>
     ~~~
 
 33. Save one or more images to a tar archive
@@ -181,27 +181,27 @@
     # docker save -o  <tar_file_path> <image_name>
     ~~~
 
-33. To know the logs of container
+34. To know the logs of container
     ~~~
     # docker logs <c_id>
     ~~~
 
-34. To check the continous logs of container
+35. To check the continous logs of container
     ~~~
     # docker logs <c_id> -f
     ~~~
 
-35. To know the docker information
+36. To know the docker information
     ~~~
     # docker system info
     ~~~
 
-36. To change the container name
+37. To change the container name
     ~~~
     # docker rename <old_name> <new_name>
     ~~~ 
 
-37. To copy a file to container
+38. To copy a file to container
     ~~~
     # docker container cp <file_path> <container_id>:<dest_path>
     ~~~ 
