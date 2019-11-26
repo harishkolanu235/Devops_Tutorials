@@ -6,7 +6,7 @@
     ##### If you are using CentOS
     ~~~
     # yum update
-    # yum install groupinstall "Development Tools"
+    # yum groupinstall "Development Tools"
     # sudo yum install gettext-devel openssl-devel perl-CPAN curl-devel perl-devel zlib-devel
     ~~~
     ##### If you are using Ubuntu
