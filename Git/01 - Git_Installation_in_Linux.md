@@ -34,7 +34,7 @@ Use below command
     ~~~
 6. Set the Git Path
     ~~~
-    # echo "export PATH=/usr/local/git bin:$PATH" >> /etc/profile
+    # echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/profile
     # source /etc/profile        // update the file
     ~~~
 7. Now to check the version of Git installed we will use the command:
