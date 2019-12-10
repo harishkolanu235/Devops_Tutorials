@@ -75,133 +75,144 @@
     Ex: # docker container exec ubuntu-cnt2 ls /etc/
     ~~~
 
-13. Attache the container with particular user
+13. Run the commands in container with root user without attach
+    ~~~
+    # docker container exec -u 0  <cname/cid> chmod -R <user_name>:<user_name> <path>
+    Ex: # docker container exec -u 0 ubuntu-cnt2 chmod -R jenkins:jenkins  /var/jenkins_home/jobs
+    ~~~
+    ~~~
+14. Attache the container with particular user
     ~~~
     # docker container exec -it <c_id> -u <user_name> /bin/bash 
     ~~~
 
-14. To display the Docker running Containers.
+15. Attache the container with root user
+    ~~~
+    # docker container exec -u 0 -it <c_id>  /bin/bash 
+    ~~~
+    
+16. To display the Docker running Containers.
     ~~~
     # docker container ps 
     ~~~
 
-15. To Display the last running container..
+17. To Display the last running container..
     ~~~
     # docker container ps -l
     ~~~
 
-16. To Display the all the containers ether running or stop.
+18. To Display the all the containers ether running or stop.
     ~~~
     # docker container ps  -a
     ~~~
 
-17. To Display the particular number of the containers ether running or stop.
+19. To Display the particular number of the containers ether running or stop.
     ~~~
     # docker container ps -n 2
     ~~~
 
-18. To stop the container
+20. To stop the container
     ~~~
     # docker container stop  <cid>
     ~~~
 
-19. To start the already existed container
+21. To start the already existed container
     ~~~
     # docker container start  <cid>
     ~~~
-20. To delete the images
+22. To delete the images
     ~~~
     # docker rmi  <img_name>
     ~~~
 
-21. To delete all the images
+23. To delete all the images
     ~~~
     # docker rmi  $(docker images -q)
     ~~~
  
-22. To delete the container
+24. To delete the container
     ~~~
     # docker rm  <cid>
     ~~~
 
-23. To delete all the running container
+25. To delete all the running container
   
     ~~~
     # docker rm  $(docker ps  -q)  --force
     ~~~
 
-24. To delete all the container weather running or not
+26. To delete all the container weather running or not
     ~~~
     # docker rm  $(docker ps  -a -q)  --force 
     or
     # docker container prune
     ~~~
 
-25. to pause the processes in a running container.
+27. to pause the processes in a running container.
     ~~~
     # docker  pause  <cid>  or  <cname>
     ~~~
 
-26. to unpause the processes in a running container.
+28. to unpause the processes in a running container.
     ~~~
     # docker  unpause  <cid>  or  <cname>
     ~~~
-27. To see the processes within a container
+29. To see the processes within a container
     ~~~
     # docker  top  <cid>  or  <cname>
     ~~~
 
-28. to run a contaner with memory
+30. to run a contaner with memory
     ~~~
     # docker run -d -m 300M centos
     ~~~
 
-29. Show the history of an image
+31. Show the history of an image
     ~~~
     # docker history <image_name>
     ~~~
     
-30. Inspect changes to files or directories on a container’s filesystem
+32. Inspect changes to files or directories on a container’s filesystem
     ~~~
     # docker diff  <c_id>
     ~~~
     
-31. To see the statistics of running containers
+33. To see the statistics of running containers
     ~~~
     # docker stats  <cid>
     ~~~
 
-32. To see the full information of containers
+34. To see the full information of containers
     ~~~
     # docker inspect  <c_id>
     ~~~
 
-33. Save one or more images to a tar archive
+35. Save one or more images to a tar archive
     ~~~
     # docker save -o  <tar_file_path> <image_name>
     ~~~
 
-34. To know the logs of container
+36. To know the logs of container
     ~~~
     # docker logs <c_id>
     ~~~
 
-35. To check the continous logs of container
+37. To check the continous logs of container
     ~~~
     # docker logs <c_id> -f
     ~~~
 
-36. To know the docker information
+38. To know the docker information
     ~~~
     # docker system info
     ~~~
 
-37. To change the container name
+39. To change the container name
     ~~~
     # docker rename <old_name> <new_name>
     ~~~ 
 
-38. To copy a file to container
+40. To copy a file to container
     ~~~
     # docker container cp <file_path> <container_id>:<dest_path>
     ~~~ 
