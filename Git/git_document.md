@@ -48,6 +48,14 @@
     # git log --author="harishkolanu235"
     # git log --grep="index"
     # git log --oneline --author="harishkolanu235"
+    # git log --oneline --name-only    ----> Show only names of changed files.
+    # git log --oneline  --pretty=format:%h%x09%an%x09%ad%x09%s 
+		%h ---> commit_id
+		%x09 ---> space
+		%an ----> author name
+		%ad -----> date and time
+		%s ----> commit message
+
     ~~~
    
 9. To show the recent commit logs
