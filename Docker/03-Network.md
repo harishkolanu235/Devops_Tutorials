@@ -36,7 +36,9 @@
 
 7. Disconnect a container from a network
     ~~~
-    # docker  network   disconnect
+    # docker  network   disconnect  <network>  <cid/cname>
+    Ex: # docker network disconnect bridge  0f563hgr3v
+        # docker network disconnect 0f563hgr3v
     ~~~
 
 8. To run the image with ip to particular net.
