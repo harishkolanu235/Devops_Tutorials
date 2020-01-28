@@ -15,7 +15,7 @@
     # docker  network  create --subnet 10.1.0.0/24 --gateway 10.1.0.1 mynet1
     ~~~
     ~~~
-    # docker  network  create --subnet 10.1.0.0/24 --gateway 10.1.0.1 --ip-range 10.1.5.0/24 --driver=bridge --label=ownnetwork mynet2
+    # docker  network  create --subnet 10.10.1.0/24 --gateway 10.1.0.1 --ip-range 10.10.0.0/16 --driver=bridge --label=ownnetwork mynet2
     ~~~
 
 4. To Remove one or more networks
@@ -30,7 +30,8 @@
 
 6. Connect a container to a network
     ~~~
-    # docker  network   connect
+    # docker  network   connect  <network>  <cid/cname>
+    Ex: # docker network connect bridge  0f563hgr3v
     ~~~
 
 7. Disconnect a container from a network
@@ -40,10 +41,10 @@
 
 8. To run the image with ip to particular net.
     ~~~
-    # docker  run   -it  --name  <cname>  --net < network_name > <img_name>
+    # docker  run   -dit  --name  <cname>  --net < network_name > <img_name>
     ~~~
      ~~~
-    # docker  run   -it  --name  <cname>  --net < network_name > --ip <ip_address> <img_name>
+    # docker  run   -dit  --name  <cname>  --net < network_name > --ip <ip_address> <img_name>
     ~~~
 
 9. To run the image with ip,port and web address
