@@ -217,17 +217,16 @@
     # docker container cp <file_path> <container_id>:<dest_path>
     ~~~ 
  
- 41. To know the ip address of container
+41. To know the ip address of container
     ~~~
     # docker exec -it <container_id>  hostname -i
     # docker exec -it <container_id>  ip address
     # docker exec -it <container_id>  ip a
     ~~~ 
  
-  42. To know the which port are mapping in the container
+42. To know the which port are mapping in the container
     ~~~
     # docker port <container_id>
-   
     ~~~ 
 
 #### Connect db to container
