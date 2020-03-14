@@ -228,6 +228,17 @@
     ~~~
     # docker port <container_id>
     ~~~ 
+ 
+43. To set the restart policy to container
+    ~~~
+    # docker run -itd --restart=always 
+    ~~~ 
+ 
+44. To set the restart policy to container
+    ~~~
+    # docker update --restart=always <container_id>
+    ~~~ 
+  
 
 #### Connect db to container
 1. run one db
