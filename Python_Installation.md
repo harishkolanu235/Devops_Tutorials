@@ -33,3 +33,14 @@ Use below command
     # echo "export PATH=/usr/local/python/bin:$PATH" >> /etc/profile
     # source /etc/profile        // update the file
     ~~~
+    
+7. 
+    ~~~
+    # ln -s /usr/local/python/bin/python3.7  /usr/local/python/bin/python3
+    # ln -s /usr/local/python/bin/python3.7  /usr/bin/python3  
+    ~~~
+8. Check python version
+    ~~~
+    # python3 --version  
+    ~~~
+
