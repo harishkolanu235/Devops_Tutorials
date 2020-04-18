@@ -77,7 +77,7 @@
 
 12. How to get back a commit to staging area?
     ~~~
-    # git reset --soft <previous_commit id>
+    # git reset --soft HEAD^
     ~~~
     
 13. How to get back a file from staging area to working area?
