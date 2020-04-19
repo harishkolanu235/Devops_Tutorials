@@ -126,7 +126,8 @@
 21. To delete the branch
     ~~~
     # git branch -d <branch_name>
-    or
+    
+    Note: if you want to delete forcefully, we can use below command
     # git branch -D <branch_name>
     ~~~
 22. How do you push the files to master branch in remote repo?
