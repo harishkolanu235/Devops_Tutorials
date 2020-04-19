@@ -171,31 +171,41 @@
     # git branch --merged   // It lists the branches that have been merged into the current branch. 
     # git branch --no-merged    // It lists the branches that have not been merged.
     ~~~
-28. To store the data into stash? 
+    
+28. How to selectively pickup the commit's from child branch
+    ~~~
+    # git cherry-pick  <commit_id1> <commit_id2>
+    
+    Example:
+    # git  cherry-pick   f29604a    efcb77a 
+    
+    ~~~
+
+29. To store the data into stash? 
     ~~~
     # git stash save "<message>" 
     
     Note: the files must and should in the stage/index/cache area 
     ~~~
     
-29. To see the stash list? 
+30. To see the stash list? 
     ~~~
     # git stash list
     ~~~
-30. To copy the data into branches? 
+31. To copy the data into branches? 
     ~~~
     # git stash apply <stash#> 
     ~~~
-31. To move the data into branches? 
+32. To move the data into branches? 
     ~~~
     # git stash pop <stash#>
     ~~~
-32. To delete the stash area?
+33. To delete the stash area?
     ~~~
     # git stash drop <stash#>   // delete the particular stash 
     # git stash clear       // delete the entire stash list
     ~~~
-33. How to give an access to a specific person to repository? 
+34. How to give an access to a specific person to repository? 
     ~~~
     You can invite users to become collaborators to your personal repository.
     • Under your repository, click on Settings.
@@ -205,7 +215,7 @@
     • Click Add collaborator.
     • The user will receive an email inviting them to the repository. Once they accept your invitation, they will have collaborator access to your repository.
     ~~~
-34. How to Lock a branch? why we need to lock a branch?
+35. How to Lock a branch? why we need to lock a branch?
     ~~~
     • On GitHub, navigate to the main page of the repository. 
     • Under your repository name, click on Settings. 
@@ -214,7 +224,7 @@
     • Select Protect this branch. 
     • Click Save changes. 
     ~~~
-35. How to delete Repository in GitHub?
+36. How to delete Repository in GitHub?
     ~~~
     • On GitHub, navigate to the main page of the repository.
     • Under your repository name, click Settings.
