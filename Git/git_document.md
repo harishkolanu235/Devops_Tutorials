@@ -95,7 +95,15 @@
     ~~~
     # git reset --hard HEAD^
 
-    Note: if you want to discard the  latest 3 commits than use HEAD^3
+    Note: if you want to discard the  latest 3 commits than use HEAD^^^ (or)  HEAD~3 
+    ~~~
+    or
+    ~~~
+    # git rebase -i HEAD^
+    
+    or
+    
+    # git rebase -i HEAD~3
     ~~~
     
 16. When file have staging area or file have committed if file is deleted in local repository unfortunately how to get back that file to staging area?
