@@ -231,4 +231,15 @@
     • Scroll to the bottom of the page and you will find Delete this repository button
     • When you click on that button, another pop up will appear, here you need to type in the name of your repository name and click on the button bellow which says: I understand the consequences, delete the repository.
     ~~~
+
+33. To get the latest commit from all branches in remotely
+    ~~~
+    # for branch in `git branch -r | grep -v HEAD`; do echo -e `git log --format=%h%x09%an%x09%ad%x09%s%x09%cr $branch -1` \\t$branch;done
+    
+    # for branch in `git branch -r | grep -v HEAD`; do echo $branch; echo -e `git log --format=%h%x09%an%x09%ad%x09%s%x09%cr  $branch -1`; echo -e "\n";done
+    ~~~
+34. To update all local branches
+    ~~~
+    # git pull --all
+    ~~~
     
