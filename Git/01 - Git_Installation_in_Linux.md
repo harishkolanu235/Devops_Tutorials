@@ -36,12 +36,23 @@ Use below command
     # make
     # make install
     ~~~
-6. Set the Git Path
+6. check the git version now, it wont change to new verison becasue we didn't set the path yet to new version
+    ~~~
+    # git --version
+    ~~~
+7. Set the Git Path, we have many ways to set the path. We can choose any one method.
+    Method - 1) 
     ~~~
     # echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/profile
     # source /etc/profile        // update the file
     ~~~
-7. Now to check the version of Git installed we will use the command:
+    Method - 2) 
+    ~~~
+    # vim /etc/profile.d/git.sh
+        export PATH=/usr/local/git/bin:${PATH}
+    # source /etc/profile.d/git.sh        // update the file
+    ~~~
+8. Now to check the version of Git, it has been changed.:
     ~~~
     # git --version
     ~~~
