@@ -41,6 +41,7 @@ Use below command
     # git --version
     ~~~
 7. Set the Git Path, we have many ways to set the path. We can choose any one method.
+
     Method - 1) 
     ~~~
     # echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/profile
