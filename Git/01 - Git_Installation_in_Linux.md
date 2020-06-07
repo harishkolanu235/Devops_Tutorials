@@ -5,9 +5,10 @@
 1. First we need to install the required software dependencies that are all available in default CentOS repository.
     ##### If you are using CentOS
     ~~~
-    # yum update
-    # yum groupinstall "Development Tools"
-    # sudo yum install gettext-devel openssl-devel perl-CPAN curl-devel perl-devel zlib-devel
+    # yum update -y 
+    # yum groupinstall "Development Tools" -y
+    # sudo yum install gettext-devel openssl-devel perl-CPAN curl-devel perl-devel zlib-devel -y
+    # git --version
     ~~~
     ##### If you are using Ubuntu
     ~~~
@@ -16,15 +17,18 @@
     ~~~
 2. Download the latest git version.
    You will find the below link:
-    [Download git](https://kernel.org/pub/software/scm/git)
+    [Download git](https://mirrors.edge.kernel.org/pub/software/scm/git/)
+    ~~~
+    # wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.27.0.tar.gz
+    ~~~
 3. Once the download is completed we have to extract the file from the downloaded Git Tar file. For that we will use Tar command.
     ~~~
-    # tar -zxvf tar-2.19.1.tar.gz
+    # tar -zxvf git-2.27.0.tar.gz 
     ~~~
 4. Now let’s change the directory to Git.
 Use below command
     ~~~
-    # cd git-2.19.1
+    # cd git-2.27.0
     ~~~
 5. We are in the source folder we can begin the source build process. For that first type below commands:
     ~~~
