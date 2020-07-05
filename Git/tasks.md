@@ -7,6 +7,7 @@
     
 2. To see the difference in file content between working directory and last commit
     ~~~
+    # git diff HEAD <file_name>
     ~~~
     
 3. To see the difference in file content between working directory and sepecific commit
