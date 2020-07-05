@@ -23,6 +23,9 @@
 4. To see the status of a file
     ~~~
     # git status
+    
+    Note:  If we want concise output have to use -s option.
+    Ex: git status -s
     ~~~
 
 5. To move a particular file from Stating space area to local repository
