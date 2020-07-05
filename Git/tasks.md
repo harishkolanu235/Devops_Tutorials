@@ -22,6 +22,8 @@
     
 4. To see the difference in file content between staging area and last commit
     ~~~
+    We have to use --staged or --cached option
+    # git diff --staged HEAD <file_name>
     ~~~
     
 5. To see the difference in file content between staging area and specifi commit
