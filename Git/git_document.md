@@ -5,7 +5,7 @@
     # mkdir /gitlab
     # cd /gitlab
     # git init
-    It will create .git directory. Where
+    It will create empty .git directory. Where
     the .git directory is there that is local repository.
     # ls
     ~~~
@@ -242,4 +242,8 @@
     ~~~
     # git pull --all
     ~~~
-    
+   
+35. To list the tracked files by git 
+    ~~~
+    # git ls-files
+    ~~~
