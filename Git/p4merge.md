@@ -1,4 +1,4 @@
-** How to configure P4merge with git
+# How to configure P4merge with git
 ---
 
 difftool configuration
