@@ -44,4 +44,14 @@
 7. Last commit vs last but one commit
     ~~~
     # git diff HEAD HEAD~1
+    
+    or
+    
+    # git diff HEAD HEAD^1
+  
+    
+    Note: if you want compare with perticular file
+    # git diff HEAD HEAD~1 <file_name>
+    or 
+    # git diff HEAD HEAD^1 <file_name>
     ~~~
