@@ -55,3 +55,13 @@
     or 
     # git diff HEAD HEAD^1 <file_name>
     ~~~
+   
+ 8. To see the difference in content of between two branches
+    ~~~
+    # git diff <branch1> <branch2>
+    ~~~
+ 
+9. To see the difference in local repository and remote repository
+    ~~~
+    # git diff master origin/master
+    ~~~
