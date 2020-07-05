@@ -11,7 +11,9 @@
     ~~~
     # git diff HEAD <file_name>
     
-    Note:  HEAD ---> latest commit
+    Note: 
+    latest commit can be referenced by HEAD
+    HEAD ---> latest commit
     ~~~
     
 3. To see the difference in file content between working directory and sepecific commit
