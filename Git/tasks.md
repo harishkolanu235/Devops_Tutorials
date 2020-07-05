@@ -41,3 +41,7 @@
     ~~~
     # git diff <commit1>..<commit2>
     ~~~
+7. Last commit vs last but one commit
+    ~~~
+    # git diff HEAD HEAD~1
+    ~~~
