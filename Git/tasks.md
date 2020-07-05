@@ -18,6 +18,7 @@
     
 3. To see the difference in file content between working directory and sepecific commit
     ~~~
+    # git diff <specifi_commit> <file_name>
     ~~~
     
 4. To see the difference in file content between staging area and last commit
@@ -33,8 +34,10 @@
     
 5. To see the difference in file content between staging area and specifi commit
     ~~~
+    # git diff --staged <specific_commit> <file_name>
     ~~~
     
 6. To see the difference in file content between two commits.
     ~~~
+    # git diff <commit1>..<commit2>
     ~~~
