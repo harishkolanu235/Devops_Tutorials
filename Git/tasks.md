@@ -4,7 +4,7 @@
     ~~~
     # git diff <file_name>
     
-    Note: git always compare to right to left side, means git diff <file_name> command compare from staging area to working area.
+    Note: git always compare from right to left side, means git diff <file_name> command compare from staging area to working area.
     ~~~
     
 2. To see the difference in file content between working directory and last commit
@@ -24,6 +24,11 @@
     ~~~
     We have to use --staged or --cached option
     # git diff --staged HEAD <file_name>
+    or
+    # git diff --staged <file_name>
+    
+    Note: if you dont mention HEAD, it will take by defualt it takes right side area means it takes HEAD.
+    Example: # git diff <file_name> ---> here dont mention HEAD so by defualt it takes right side area means staging area, so it compare to staging area to working area.
     ~~~
     
 5. To see the difference in file content between staging area and specifi commit
