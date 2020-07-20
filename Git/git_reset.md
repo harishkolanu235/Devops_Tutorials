@@ -12,6 +12,7 @@ There are two utilities of git reset command
     # git reset <file_name>
     
     Note: This command will bring changes from staging are to working directory, It is opposite to git add command.
+          To discard the staged changes in staging area.
     ~~~
     
 2. To rmove files from only staging area back to working directory
