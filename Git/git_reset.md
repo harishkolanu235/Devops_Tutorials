@@ -15,7 +15,13 @@ There are two utilities of git reset command
           To discard the staged changes in staging area.
     ~~~
     
-2. To rmove files from only staging area back to working directory
+2. To remove files from only staging area back to working directory
     ~~~
     # git rm --cached <file_name>
     ~~~
+
+Utility 2) To undo the commits at repository level
+
+we can also reset to undo commits at repository level
+
+Syntax:  git reset <mode>  <commit_id>
