@@ -7,13 +7,13 @@
     ~~~
     # yum update -y 
     # yum groupinstall "Development Tools" -y
-    # sudo yum install gettext-devel openssl-devel perl-CPAN curl-devel perl-devel zlib-devel -y
+    # sudo yum install dh-autoreconf gettext-devel openssl-devel perl-CPAN curl-devel perl-devel zlib-devel expat-devel openssl-devel -y
     # git --version
     ~~~
     ##### If you are using Ubuntu
     ~~~
     # apt-get update
-    # apt-get install build-essential libssl-dev libcurl4-gnutls-dev libghc-zlib-dev zlib1g-dev tcl-dev libexpat1-dev gettext unzip
+    # apt-get install build-essential dh-autoreconf libssl-dev libcurl4-gnutls-dev libghc-zlib-dev zlib1g-dev tcl-dev libexpat1-dev libz-dev gettext unzip
     ~~~
 2. Download the latest git version.
    You will find the below link:
