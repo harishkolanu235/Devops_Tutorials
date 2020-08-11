@@ -7,6 +7,7 @@
     ~~~
     # yum update -y 
     # yum groupinstall "Development Tools" -y
+    # yum install git-all
     # sudo yum install dh-autoreconf gettext-devel openssl-devel perl-CPAN curl-devel perl-devel zlib-devel expat-devel openssl-devel -y
     # git --version
     ~~~
