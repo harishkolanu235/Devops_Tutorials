@@ -24,4 +24,9 @@ Git rebase is two step process
 
 ##### Disadvantages of git reabase 
 
-1. 
+1. It rewrite history. we can't see history of commits from feature branch.
+2. We doen't aware which chnages are coming from feature branch. 
+
+  ~~~
+  Note: Rebase is very dangerous operation and it is never recommended  to use on public repositories because it rewrite history.
+  ~~~
