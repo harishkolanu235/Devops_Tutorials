@@ -10,7 +10,7 @@ Git rebase is two step process
 2. Merge feature branch into master branch (fasr-forwad merge)
   ~~~
     # git checkout master
-    # git rebase feature
+    # git merge feature
   ~~~
 
 ##### Advantages of git reabase 
