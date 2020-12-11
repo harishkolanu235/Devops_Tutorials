@@ -25,3 +25,5 @@ Utility 2) To undo the commits at repository level
 we can also reset to undo commits at repository level
 
 Syntax:  git reset <mode>  <commit_id>
+
+Note: Once you reset the commit, above commits also will be deleted
