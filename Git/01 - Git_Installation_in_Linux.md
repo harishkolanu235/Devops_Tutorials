@@ -33,7 +33,7 @@ Use below command
     ~~~
 5. We are in the source folder we can begin the source build process. For that first type below commands:
     ~~~
-    # ./configure --prefix=/usr/local/git
+    # ./configure --prefix=/usr
     # make
     # make install
     ~~~
