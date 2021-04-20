@@ -28,6 +28,14 @@ sudo adduser nexus
 sudo chown -R nexus:nexus /opt/nexus
 ```
 
+Change the owner and group permission to /opt/nexus and /opt/sonatype-work directories.
+```sh 
+chown -R nexus:nexus  /opt/nexus/
+chown -R nexus:nexus /opt/sonatype-work
+chmod -R 775 /opt/nexus/
+chmod -R 775 nexus:nexus /opt/sonatype-work
+```
+
 Open /opt/nexus/bin/nexus.rc file, uncomment run_as_user parameter and set it as following.
 ```sh 
 vi /opt/nexus/bin/nexus.rc
