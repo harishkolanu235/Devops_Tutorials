@@ -23,6 +23,7 @@
 
 3. Update java.sh file to kernal
     ~~~
-    $ source
+    $ source /etc/profile.d/java.sh
+    ~~~
 
 
