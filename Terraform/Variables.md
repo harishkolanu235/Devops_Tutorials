@@ -23,19 +23,28 @@ The Terraform language uses the following types for its values
 
 - bool: a boolean value, either true or false. bool values can be used in conditional logic.
     ~~~
-        variable "region" {
+        variable "enabled" {
             default = true|false
         }
     ~~~
 
 - list (or tuple): a sequence of values, like ["us-west-1a", "us-west-1c"]. Elements in a list or tuple are identified by consecutive whole numbers, starting with zero.
     ~~~
-        variable "region" {
+        variable "mylist" {
             type    = list(string)
-            default = "us-east-2"
+            default = ["value1","value2","value3"]
         }
     ~~~
 
 - map (or object): a group of values identified by named labels, like {name = "Mabel", age = 52}.
+    ~~~
+        variable "mymap" {
+            type    = map
+            default = {
+                key1 = "value1"
+                key2 = "value2"
+            }
+        }
+    ~~~
 
 Strings, numbers, and bools are sometimes called primitive types. Lists/tuples and maps/objects are sometimes called complex types, structural types, or collection types.
