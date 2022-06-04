@@ -14,12 +14,10 @@ The Terraform language uses the following types for its values
         
         Example:
             provider "aws" {
-            region = var.region
-            access_key = var.access_key
-            secret_key = var.secret_key
-}
-
-
+                region = var.region
+                access_key = var.access_key
+                secret_key = var.secret_key
+            }
     ~~~
 
 - number: a numeric value. The number type can represent both whole numbers like 15 and fractional values like 6.283185.
