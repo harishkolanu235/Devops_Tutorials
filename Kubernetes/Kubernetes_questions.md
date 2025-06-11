@@ -17,6 +17,17 @@
         - containerPort: 80
     ~~~
 2. What is init container?
+
+  - init container is type of container that run before main application container in a Pod. Init containers can contain utilities or setup scripts not present in an app image.
+  - They are primarily used to perform initialization tasks that must complete successfully before the main containers start.
+  - If an init container fails, Kubernetes retries until it succeeds or the Pod fails.
+  - Init containers run in the same Pod (thus same network & volumes) but are separate from app containers.
+  - Below are the use cased
+    - Setting up config files
+    - Waiting for services (like databases) to be ready
+    - Downloading dependencies
+    - Running setup scripts
+
 3. What is sidecar container?
 4. What is ephemeral container?
 5. What is a Deployment in Kubernetes? Write a deployment.yaml for deploying 3 replicas of an Nginx container.
