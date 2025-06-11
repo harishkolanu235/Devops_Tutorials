@@ -1,4 +1,4 @@
-1. What is a Pod in Kubernetes? Create a pod.yaml for a single-container pod running Nginx.
+#### 1. What is a Pod in Kubernetes? Create a pod.yaml for a single-container pod running Nginx.
 
     - A Pod is small deployment and its reprasent a group of one or more containers that shares resources like storage volumes and network, and a specification for how to run the containers.
     
@@ -16,7 +16,8 @@
         ports:
         - containerPort: 80
     ~~~
-2. What is init container?
+
+#### 2. What is init container?
 
   - init container is type of container that run before main application container in a Pod. Init containers can contain utilities or setup scripts not present in an app image.
   - They are primarily used to perform initialization tasks that must complete successfully before the main containers start.
@@ -28,9 +29,55 @@
     - Downloading dependencies
     - Running setup scripts
 
-3. What is sidecar container?
-4. What is ephemeral container?
-5. What is a Deployment in Kubernetes? Write a deployment.yaml for deploying 3 replicas of an Nginx container.
+    ~~~
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: myapp
+      labels:
+        app: myapp
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: myapp
+      template:
+        metadata:
+          labels:
+            app: myapp
+        spec:
+          initContainers:
+            - name: logshipper
+              image: alpine:latest
+              restartPolicy: Always
+              command: ['sh', '-c', 'tail -F /opt/logs.txt']
+              volumeMounts:
+                - name: data
+                  mountPath: /opt
+          containers:
+            - name: myapp
+              image: alpine:latest
+              command: ['sh', '-c', 'while true; do echo "logging" >> /opt/logs.txt; sleep 1; done']
+              volumeMounts:
+                - name: data
+                  mountPath: /opt
+          
+          volumes:
+            - name: data
+              emptyDir: {}
+    ~~~
+
+#### 3. What is sidecar container?
+  
+  - Sidecar containers are the secondary containers that run along with the main application container within the same Pod.
+  - These containers are used to enhance or to extend the functionality of the primary app container by providing additional services, or functionality such as logging, monitoring, security, or data synchronization, without directly altering the primary application code.
+  -  For example, if you have a web application that requires a local webserver, the local webserver is a sidecar and the web application itself is the app container
+
+#### 4. What is ephemeral container?
+
+  - Its a special type of container that runs temporarily in an existing Pod to accomplish user-initiated actions such as troubleshooting.
+
+#### 5. What is a Deployment in Kubernetes? Write a deployment.yaml for deploying 3 replicas of an Nginx container.
 
     - Deployment is a higher-level resource used to manage Pods and ReplicaSets. It provides a declarative way to deploy, update, and scale your applications.
     
@@ -44,7 +91,7 @@
 
         **roll-out:** Automatically rolls out updates to Pods without downtime.
 
-        **roll-out:** we can rolling back to a previous version if something goes wrong.
+        **roll-back:** we can rolling back to a previous version if something goes wrong.
     ~~~
     apiVersion: apps/v1
     kind: Deployment
@@ -68,32 +115,52 @@
             ports:
               - containerPort: 80
     ~~~
-6. What is demonset?
-7. What is statefullset?
+#### 6. What is demonset? Why use DaemonSet?
 
-8. What is a Service in Kubernetes, and what are the types of Services?
-9. When would you use each type of Kubernetes Service (ClusterIP, NodePort, LoadBalancer, ExternalName)?
+  - DaemonSet ensures that a pod is running on every node in the cluster that matches a given selector, or on a subset of nodes. 
+  - It's designed for node-specific tasks like logging, monitoring, or storage provisioning. 
+
+  **Use-cases**
+
+  - To ensure logs are captured from all nodes.
+  - To run metrics exporters like Node Exporter.
+  - To install CNI plugins or storage drivers on every node
+#### 7. What is statefullset? why use statefullset?
+
+  - StatefulSet manages stateful applications that require persistent storage, stable network identifiers, and ordered deployment and scaling.
+  - Unlike Deployments, which are used for stateless applications, StatefulSets provide a way to maintain persistent identities and ordered scaling for Pods.
+  - Each Pod gets a stable hostname (e.g., pod-0, pod-1, etc.) that never changes across rescheduling.
+  - Each Pod can have its own PersistentVolumeClaim (PVC), ensuring data persists across restarts.
+  - Pods are created, updated, and deleted in order (pod-0 first, then pod-1, etc.).
+  - use-cases: Databases (MySQL, MongoDB, Cassandra), Zookeeper, Kafka — any app where state matters.
+
+    **why use it**
+  - Need persistent storage and stable Pod names for cluster membership.
+  - Require stable network identity and start/stop ordering.
+
+#### 8. What is a Service in Kubernetes, and what are the types of Services?
+#### 9. When would you use each type of Kubernetes Service (ClusterIP, NodePort, LoadBalancer, ExternalName)?
 
 
-10. Explain port, targetPort, and nodePort in a Kubernetes service.
-11. How would you expose a Kubernetes application externally?
-12. What is Helm, and what are its components (Chart, Repository, Release)?
-13. What is the difference between EXPOSE in a Dockerfile and docker run -p?
-14. How do you run Nginx on a Linux server using Docker?
-15. Explain HTTP, HTTPS, TCP, and UDP with examples.
-16. What is a Dockerfile? Write a basic Dockerfile for a Node.js application.
-17. What is a base image in Docker? Which base image would you use for Python or Node.js?
-18. How do you check for open ports on a Linux system?
-19. What are the benefits of using a firewall?
-20. What is the use of Ingress and Ingress Controller in Kubernetes?
-21. Explain the Kubernetes controllers: Deployment, StatefulSet, ReplicaSet, and DaemonSet.
-22. What is the difference between Deployment and ReplicaSet?
-23. What are Kubernetes Probes (Liveness, Readiness, Startup)?
-24. What is the difference between Stateful and Stateless applications? Give examples.
-25. What are Namespaces in Kubernetes?
-26. What is Port Forwarding in Kubernetes?
+#### 10. Explain port, targetPort, and nodePort in a Kubernetes service.
+#### 11. How would you expose a Kubernetes application externally?
+#### 12. What is Helm, and what are its components (Chart, Repository, Release)?
+#### 13. What is the difference between EXPOSE in a Dockerfile and docker run -p?
+#### 14. How do you run Nginx on a Linux server using Docker?
+#### 15. Explain HTTP, HTTPS, TCP, and UDP with examples.
+#### 16. What is a Dockerfile? Write a basic Dockerfile for a Node.js application.
+#### 17. What is a base image in Docker? Which base image would you use for Python or Node.js?
+#### 18. How do you check for open ports on a Linux system?
+#### 19. What are the benefits of using a firewall?
+#### 20. What is the use of Ingress and Ingress Controller in Kubernetes?
+#### 21. Explain the Kubernetes controllers: Deployment, StatefulSet, ReplicaSet, and DaemonSet.
+#### 22. What is the difference between Deployment and ReplicaSet?
+#### 23. What are Kubernetes Probes (Liveness, Readiness, Startup)?
+#### 24. What is the difference between Stateful and Stateless applications? Give examples.
+#### 25. What are Namespaces in Kubernetes?
+#### 26. What is Port Forwarding in Kubernetes?
 
-27. A Pod is stuck in CrashLoopBackOff. How do you troubleshoot it?
+#### 27. A Pod is stuck in CrashLoopBackOff. How do you troubleshoot it?
     ~~~
     ✅ Check logs: kubectl logs <pod-name>
 
@@ -102,7 +169,7 @@
     ✅ Check events & limits: Look for OOMKilled, failing readiness probes, or image issues.
     ~~~
     
-28. Your application is running slow inside a Pod. How do you debug it?
+#### 28. Your application is running slow inside a Pod. How do you debug it?
     ~~~
     ✅ Check resource usage: kubectl top pod <pod-name>
 
@@ -113,7 +180,7 @@
     ✅ Run debugging commands: kubectl exec -it <pod-name> -- sh
     ~~~
 
-29. A Service is not reachable inside the cluster. How do you diagnose it?
+#### 29. A Service is not reachable inside the cluster. How do you diagnose it?
 
     ~~~
     ✅ Check if the Service exists: kubectl get svc
@@ -125,7 +192,7 @@
     ✅ Debug with busybox: kubectl run -it --rm busybox -- /bin/sh and nc -zv <service-ip> <port>
     ~~~
 
-30. You need to roll back a failed Deployment. What do you do?
+#### 30. You need to roll back a failed Deployment. What do you do?
 
     ~~~
     ✅ Check the history: kubectl rollout history deployment <deployment-name>
@@ -135,7 +202,7 @@
     ✅ Monitor rollout status: kubectl rollout status deployment <deployment-name>
     ~~~
 
-31. A Node is NotReady. How do you investigate?
+#### 31. A Node is NotReady. How do you investigate?
 
     ~~~
     ✅ Describe the node: kubectl describe node <node-name>
@@ -145,7 +212,7 @@
     ✅ Verify network & disk issues: kubectl get events --field-selector involvedObject.kind=Node
     ~~~
 
-32. A Pod should run only on specific nodes. How do you enforce this?
+#### 32. A Pod should run only on specific nodes. How do you enforce this?
 
     ~~~
     ✅ Use nodeSelector in the Pod spec.
@@ -155,7 +222,7 @@
     ✅ Use taints & tolerations to restrict pod placement.
     ~~~
 
-33. You need to auto-scale your Pods based on CPU usage. How do you do it?
+#### 33. You need to auto-scale your Pods based on CPU usage. How do you do it?
 
     ~~~
     ✅ Enable Horizontal Pod Autoscaler (HPA):kubectl autoscale deployment <deployment-name> --cpu-percent=50 --min=2 --max=10
@@ -163,7 +230,7 @@
     ✅ Ensure Metrics Server is installed: kubectl top pods
     ~~~
 
-34. Your Pods are getting evicted. What could be the reason?
+#### 34. Your Pods are getting evicted. What could be the reason?
 
     ~~~
     ✅ Check node pressure: kubectl describe node <node-name>
@@ -173,7 +240,7 @@
     ✅ Check taints: Nodes with NoSchedule taints may cause pod evictions.
     ~~~
 
-35. A Secret is mounted inside a Pod but not working. How do you fix it?
+#### 35. A Secret is mounted inside a Pod but not working. How do you fix it?
     
     ~~~
     ✅ Check if the Secret exists: kubectl get secrets
@@ -183,7 +250,7 @@
     ✅ Ensure the correct key is referenced: envFrom vs env in Deployment YAML.
     ~~~
 
-36. You need to migrate an application from one cluster to another. What's the best approach?
+#### 36. You need to migrate an application from one cluster to another. What's the best approach?
     
     ~~~
     ✅ Backup & restore resources using kubectl get all -o yaml > backup.yaml
