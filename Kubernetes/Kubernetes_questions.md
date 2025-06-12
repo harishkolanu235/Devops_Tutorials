@@ -125,6 +125,7 @@
   - To ensure logs are captured from all nodes.
   - To run metrics exporters like Node Exporter.
   - To install CNI plugins or storage drivers on every node
+
 #### 7. What is statefullset? why use statefullset?
 
   - StatefulSet manages stateful applications that require persistent storage, stable network identifiers, and ordered deployment and scaling.
@@ -139,28 +140,226 @@
   - Require stable network identity and start/stop ordering.
 
 #### 8. What is a Service in Kubernetes, and what are the types of Services?
-#### 9. When would you use each type of Kubernetes Service (ClusterIP, NodePort, LoadBalancer, ExternalName)?
+
+  - By using service, it can be enable the network access to them.
+
+  **Why Service is needed**
+
+    - Pods are ephemeral — they can die, restart, or be replaced anytime.
+    - Each Pod has its own IP address but this IP is not permanent.
+    - To allow stable communication to these changing Pods, a Service is used.
+
+  **Types of Services**
+
+    - ClusterIP (default) ----> Exposes the Service on an internal IP in the cluster. Accessible only within the cluster.
+
+    - Node Port ----> Exposes the Service on each Node's IP at a static port. External traffic can access the Service via <NodeIP>:<NodePort>.
+
+    - LoadBalancer ----> Maps the Service to a DNS name (outside the cluster) instead of a Pod. It will get public ip to access the app.
+
+  ~~~
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: my-service
+    spec:
+      selector:
+        app: my-app    # Targets Pods with this label
+      ports:
+        - protocol: TCP
+          port: 80         # Port exposed by the Service
+          targetPort: 8080 # Port on the Pod
+      type: ClusterIP
+
+  ~~~
+
+#### 9. How would you expose a Kubernetes application externally?
+  - to expose an application externally (outside the cluster), you can use any of the following methods:
+    - **NodePort Service**
+    ~~~
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: my-app-service
+      spec:
+        type: NodePort
+        selector:
+          app: my-app
+        ports:
+          - port: 80
+            targetPort: 8080
+            nodePort: 30080  # Exposed port on the node
+    ~~~
+
+    - **LoadBalancer Service**
+      - Automatically provisions an external Load Balancer.
+      - You get a public IP to access the app.
+    ~~~
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: my-app-service
+      spec:
+        type: LoadBalancer
+        selector:
+          app: my-app
+        ports:
+          - port: 80
+            targetPort: 8080
+
+    ~~~
+
+    - **Ingress Resource** ----> Provides HTTP routing via path or host-based rules.
+    ~~~
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: my-app-ingress
+      spec:
+        rules:
+        - host: myapp.example.com
+          http:
+            paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: my-app-service
+                  port:
+                    number: 80
+
+    ~~~
+#### 10. What is Helm, and what are its components (Chart, Repository, Release)?
+
+  - Helm is a package manager for Kubernetes, similar to APT (Debian) or YUM (RHEL).
+It simplifies deploying, configuring, and managing applications in Kubernetes by packaging resources into "Charts".
+
+**Helm Components**
+  - **Charts** 
+    - Contains all the Kubernetes resource definitions (YAML files) needed to run an app, such as Deployments, Services, ConfigMaps, etc.
+    - A Chart can be parameterized using variables (values.yaml).
+
+  - **Repository** ---> A place where Charts are stored and shared.Similar to Docker Registry or Git repo.
+    ~~~
+    $ helm repo add bitnami https://charts.bitnami.com/bitnami
+    
+    $ helm repo update
+    
+    $ helm search repo nginx
+    ~~~
+  - **Release**
+    - You can install multiple Releases from the same Chart with different names/configurations.
+    ~~~
+    $ helm install my-nginx bitnami/nginx   # Creates a Release called 'my-nginx'
+    ~~~
+
+#### 11. What is the difference between EXPOSE in a Dockerfile and docker run -p?
+
+  - EXPOSE 80 just declares that the container listens on port 80, but does not publish it to the host.
+
+  - -p 8080:80 actually makes port 80 inside the container accessible as port 8080 on the host.
 
 
-#### 10. Explain port, targetPort, and nodePort in a Kubernetes service.
-#### 11. How would you expose a Kubernetes application externally?
-#### 12. What is Helm, and what are its components (Chart, Repository, Release)?
-#### 13. What is the difference between EXPOSE in a Dockerfile and docker run -p?
-#### 14. How do you run Nginx on a Linux server using Docker?
-#### 15. Explain HTTP, HTTPS, TCP, and UDP with examples.
-#### 16. What is a Dockerfile? Write a basic Dockerfile for a Node.js application.
-#### 17. What is a base image in Docker? Which base image would you use for Python or Node.js?
-#### 18. How do you check for open ports on a Linux system?
-#### 19. What are the benefits of using a firewall?
-#### 20. What is the use of Ingress and Ingress Controller in Kubernetes?
-#### 21. Explain the Kubernetes controllers: Deployment, StatefulSet, ReplicaSet, and DaemonSet.
-#### 22. What is the difference between Deployment and ReplicaSet?
-#### 23. What are Kubernetes Probes (Liveness, Readiness, Startup)?
-#### 24. What is the difference between Stateful and Stateless applications? Give examples.
-#### 25. What are Namespaces in Kubernetes?
-#### 26. What is Port Forwarding in Kubernetes?
+#### 12. What is the use of Ingress and Ingress Controller in Kubernetes?
 
-#### 27. A Pod is stuck in CrashLoopBackOff. How do you troubleshoot it?
+  - Ingress is an API object in Kubernetes that manages external access to services within the cluster
+  - It allows you to define rules to route traffic to different services based on:
+    - Hostnames (e.g., app.example.com)
+    - Paths (e.g., /api, /login)
+  ~~~
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: example-ingress
+  spec:
+    rules:
+    - host: myapp.example.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: my-service
+              port:
+                number: 80
+  ~~~
+
+  **The Ingress Controller** is the actual component (pod) that:
+
+    - Watches Ingress resources.
+    - Processes Ingress rules.
+    - Configures a reverse proxy (like NGINX, Traefik, HAProxy) to direct traffic accordingly.
+    - Without an Ingress Controller, an Ingress resource does nothing — it’s just a config file.
+
+
+#### 13. What is the difference between Deployment and ReplicaSet?
+  **ReplicaSet**
+
+    - A ReplicaSet (RS) ensures that a specified number of pod replicas are running at any given time.
+    - It can scale up or down pods to match the desired replica count.
+    - On its own, ReplicaSet lacks advanced features like rollout, rollback, or versioning.
+  **Deployment**
+  - A Deployment manages a ReplicaSet and adds features such as:
+    - Rolling updates
+    - Rollbacks
+    - Pause/Resume deployments
+    - History tracking
+  - Deployment automatically creates and manages ReplicaSets in the background.
+
+#### 14. What are Kubernetes Probe?
+
+  **Liveness**
+    - Checks if the container is alive (running properly).
+    - If its fails, Kubernetes will kill and restart the container.
+
+      ~~~
+      livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      ~~~
+
+  **Readiness**
+
+    - Checks if the container is ready to serve traffic.
+    - If it fails, Kubernetes removes the pod from Service endpoints, but doesn’t restart it.
+
+    ~~~
+    readinessProbe:
+    httpGet:
+      path: /ready
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    ~~~
+
+  **Startup**
+
+    - Checks if the app within the container has started successfully.
+    -  If it fails, Kubernetes restarts the container.
+
+    ~~~
+    startupProbe:
+    httpGet:
+      path: /startup
+      port: 8080
+    failureThreshold: 30
+    periodSeconds: 10
+    ~~~
+
+
+#### 15. What is Port Forwarding in Kubernetes?
+  - Port Forwarding in Kubernetes allows you to access a pod’s port directly from your local machine, without exposing it via a service or ingress to the outside world.
+  - It's useful for debugging, development, or testing when you want to interact with a pod without deploying a full service or exposing it publicly.
+  ~~~
+  $ kubectl port-forward <pod-name> <local-port>:<pod-port>
+
+  ~~~
+
+#### 16. A Pod is stuck in CrashLoopBackOff. How do you troubleshoot it?
     ~~~
     ✅ Check logs: kubectl logs <pod-name>
 
@@ -169,7 +368,7 @@
     ✅ Check events & limits: Look for OOMKilled, failing readiness probes, or image issues.
     ~~~
     
-#### 28. Your application is running slow inside a Pod. How do you debug it?
+#### 17. Your application is running slow inside a Pod. How do you debug it?
     ~~~
     ✅ Check resource usage: kubectl top pod <pod-name>
 
@@ -180,7 +379,7 @@
     ✅ Run debugging commands: kubectl exec -it <pod-name> -- sh
     ~~~
 
-#### 29. A Service is not reachable inside the cluster. How do you diagnose it?
+#### 18. A Service is not reachable inside the cluster. How do you diagnose it?
 
     ~~~
     ✅ Check if the Service exists: kubectl get svc
@@ -192,7 +391,7 @@
     ✅ Debug with busybox: kubectl run -it --rm busybox -- /bin/sh and nc -zv <service-ip> <port>
     ~~~
 
-#### 30. You need to roll back a failed Deployment. What do you do?
+#### 19. You need to roll back a failed Deployment. What do you do?
 
     ~~~
     ✅ Check the history: kubectl rollout history deployment <deployment-name>
@@ -202,7 +401,7 @@
     ✅ Monitor rollout status: kubectl rollout status deployment <deployment-name>
     ~~~
 
-#### 31. A Node is NotReady. How do you investigate?
+#### 20. A Node is NotReady. How do you investigate?
 
     ~~~
     ✅ Describe the node: kubectl describe node <node-name>
@@ -212,7 +411,7 @@
     ✅ Verify network & disk issues: kubectl get events --field-selector involvedObject.kind=Node
     ~~~
 
-#### 32. A Pod should run only on specific nodes. How do you enforce this?
+#### 21. A Pod should run only on specific nodes. How do you enforce this?
 
     ~~~
     ✅ Use nodeSelector in the Pod spec.
@@ -222,7 +421,7 @@
     ✅ Use taints & tolerations to restrict pod placement.
     ~~~
 
-#### 33. You need to auto-scale your Pods based on CPU usage. How do you do it?
+#### 22. You need to auto-scale your Pods based on CPU usage. How do you do it?
 
     ~~~
     ✅ Enable Horizontal Pod Autoscaler (HPA):kubectl autoscale deployment <deployment-name> --cpu-percent=50 --min=2 --max=10
@@ -230,7 +429,7 @@
     ✅ Ensure Metrics Server is installed: kubectl top pods
     ~~~
 
-#### 34. Your Pods are getting evicted. What could be the reason?
+#### 23. Your Pods are getting evicted. What could be the reason?
 
     ~~~
     ✅ Check node pressure: kubectl describe node <node-name>
@@ -240,7 +439,7 @@
     ✅ Check taints: Nodes with NoSchedule taints may cause pod evictions.
     ~~~
 
-#### 35. A Secret is mounted inside a Pod but not working. How do you fix it?
+#### 24. A Secret is mounted inside a Pod but not working. How do you fix it?
     
     ~~~
     ✅ Check if the Secret exists: kubectl get secrets
@@ -250,7 +449,7 @@
     ✅ Ensure the correct key is referenced: envFrom vs env in Deployment YAML.
     ~~~
 
-#### 36. You need to migrate an application from one cluster to another. What's the best approach?
+#### 25. You need to migrate an application from one cluster to another. What's the best approach?
     
     ~~~
     ✅ Backup & restore resources using kubectl get all -o yaml > backup.yaml
