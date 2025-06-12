@@ -74,6 +74,7 @@
 17. What are the types of Load Balancer?
 
     Elastic Load Balancing supports Three types of Load Balancers
+    
     **Application Load Balancer**
     - An Application Load Balancer supports layer-7, layer-7 means application layer.
     - This load balancer makes routing decisions at the application layer (HTTP/HTTPS).
