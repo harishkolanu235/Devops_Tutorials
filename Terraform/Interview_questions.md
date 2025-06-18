@@ -50,6 +50,10 @@
     - You want to avoid re-creating existing infrastructure by Terraform.
     - You are migrating old infrastructure to Infrastructure-as-Code (IaC) via Terraform.
 
+  - How does it work?
+    - It imports the resource into Terraform state file (terraform.tfstate), but does not generate the resource code (HCL) for you.
+    - After import, you must manually define the corresponding resource in .tf files matching the existing setup.
+
 #### 9. What are Modules in Terraform?
 
   - Modules are reusable Terraform configurations. They enable code reusability, maintainability, and scalability.
