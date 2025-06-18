@@ -459,3 +459,18 @@ It simplifies deploying, configuring, and managing applications in Kubernetes by
     ✅ Use GitOps tools like ArgoCD or FluxCD for deployment consistency.
     ~~~
 
+#### 26. If POD is deleted, how pod will re-create in kuberntes?
+    - Pod is deleted in a Deployment/ReplicaSet, ReplicaSet notices the missing Pod and asks the API Server to create a new Pod.
+    
+    - Kubernetes Scheduler picks a suitable Node for this new Pod.
+    
+    - Once scheduled:
+        - The Pod spec is stored in the API Server.
+        - The Kubelet on the target Node continuously watches the API Server for any Pods assigned to it.
+        
+    - When Kubelet notices this new Pod assigned to its Node, it:
+        - Downloads the container image (if needed).
+        - Sets up networking.
+        - Launches the container(s).
+        - Manages liveness/readiness probes.
+
