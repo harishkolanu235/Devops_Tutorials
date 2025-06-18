@@ -44,6 +44,10 @@
     ~~~
       $ terraform import aws_instance.example i-abcd1234
     ~~~
+  **Why Use terraform import?**
+    - Resources already exist (manually created or via other tools) and you want Terraform to manage them.
+    - You want to avoid re-creating existing infrastructure by Terraform.
+    - You are migrating old infrastructure to Infrastructure-as-Code (IaC) via Terraform.
 
 #### 9. What are Modules in Terraform?
 
