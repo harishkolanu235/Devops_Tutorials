@@ -65,7 +65,8 @@
 
 #### 10. Difference between count and for_each in Terraform?
 
-  - *count:* Used to create multiple resources based on a number.\
+  - *count:* Used to create multiple resources based on a number.
+    
       ~~~
         variable "bucket_names" {
           default = ["dev-bucket", "test-bucket", "prod-bucket"]
@@ -78,6 +79,7 @@
         }
       ~~~
   - *for_each:* Used to create resources based on a map or set of strings.
+    
       ~~~
         variable "buckets" {
           default = ["dev-bucket", "prod-bucket"]
