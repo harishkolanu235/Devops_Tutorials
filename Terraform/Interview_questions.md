@@ -65,8 +65,31 @@
 
 #### 10. Difference between count and for_each in Terraform?
 
-  - *count:* Used to create multiple resources based on a number.
+  - *count:* Used to create multiple resources based on a number.\
+      ~~~
+        variable "bucket_names" {
+          default = ["dev-bucket", "test-bucket", "prod-bucket"]
+        }
+        
+        resource "aws_s3_bucket" "bucket" {
+          count  = length(var.bucket_names)
+          bucket = var.bucket_names[count.index]
+          acl    = "private"
+        }
+      ~~~
   - *for_each:* Used to create resources based on a map or set of strings.
+      ~~~
+        variable "buckets" {
+          default = ["dev-bucket", "prod-bucket"]
+        }
+        
+        resource "aws_s3_bucket" "bucket" {
+          for_each = toset(var.buckets)
+        
+          bucket = each.value
+          acl    = "private"
+        }
+      ~~~
 
 #### 11. Can you explain depends_on in Terraform?
 
