@@ -474,3 +474,12 @@ It simplifies deploying, configuring, and managing applications in Kubernetes by
         - Launches the container(s).
         - Manages liveness/readiness probes.
 
+#### 27. What is node drain in Kubernetes?
+
+  - the kubectl drain node command is a feature that removes workloads from a given node. The purpose of the command is to tell Kubernetes that you no longer want any pods to run on a specified node.
+
+  -  Its use for maintenance, upgrades, or decommissioning of that node. It ensures that the node can be taken offline without disrupting workloads or causing data loss.
+
+#### 28. What is node cordon in Kubernetes?
+
+  - The node is marked as unschedulable (kubectl cordon <node-name>), preventing new pods from being scheduled onto it.
