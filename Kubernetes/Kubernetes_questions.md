@@ -483,3 +483,37 @@ It simplifies deploying, configuring, and managing applications in Kubernetes by
 #### 28. What is node cordon in Kubernetes?
 
   - The node is marked as unschedulable (kubectl cordon <node-name>), preventing new pods from being scheduled onto it.
+
+#### 29. What is taint and toleration in Kubernetes?
+  Kubernetes taints and tolerations are mechanisms used to control how pods are scheduled onto nodes  
+
+  - *Taint* - Its a Node property and Do not schedule any pod on this node unless the pod explicitly tolerates this taint.
+    ~~~
+      kubectl taint nodes <node-name> key=value:effect
+
+      kubectl taint nodes node1 env=prod:NoSchedule
+    ~~~
+    This taint will prevent all pods from scheduling on node1 unless they tolerate the env=prod taint.
+
+  - *Toleration* - Its a pod property and I am okay to be scheduled on nodes with this taint.
+    ~~~
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: mypod
+      spec:
+        tolerations:
+          - key: "env"
+            operator: "Equal"
+            value: "prod"
+            effect: "NoSchedule"
+    ~~~
+    This pod can now tolerate the taint env=prod:NoSchedule, so it can be scheduled on node1 from the previous example.
+
+    There are three types of effects you can use with taints:
+
+    | Effect | 	Meaning |
+    |----|-----|
+    | NoSchedule |	Pod won’t be scheduled on the node unless it tolerates the taint.|
+    | PreferNoSchedule | Scheduler will try to avoid scheduling the pod on the node but will do it if necessary.|
+    | NoExecute |	Pod will be evicted if already running and doesn't tolerate the taint. Also prevents new pods without toleration from scheduling.|
