@@ -208,7 +208,12 @@
       container_name       = "tfstate"
       key                  = "terraform.tfstate"
     }
-  }
+   }
+
+
+
+
+
 
 
 #### 22. How do you prevent accidental deletion of production resources?
