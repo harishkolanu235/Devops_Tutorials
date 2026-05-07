@@ -210,6 +210,7 @@
     }
   }
 
+
 #### 22. How do you prevent accidental deletion of production resources?
 
 	1. Terraform prevent_destroy
