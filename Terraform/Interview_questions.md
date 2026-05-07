@@ -38,7 +38,27 @@
 #### 7. How do you manage Terraform state in a team?
   - Using Remote State (e.g., Azuere storage blob, AWS S3 with DynamoDB locking, Terraform Cloud) to avoid conflicts and ensure consistency when multiple people work on the same infrastructure.
 
-#### 8. What is the purpose of terraform import?
+#### 8. What is state locking and when it is occured?
+	users or pipelines from modifying the same state file at the same time.
+
+#### 9. Have you ever faced state corruption? How did you recover?
+
+	Common causes of state corruption
+
+		Manual deletion or editing of resources
+		Interrupted terraform apply
+		Running Terraform from multiple machines without locking
+		Backend misconfiguration
+		Partial failures during resource creation
+
+	1. Stop all Terraform operations
+		Ensure no pipeline or engineer is running Terraform.
+
+	2. Restore from backend backup like s3 or storage account versioning
+
+	3. Import missing resources
+
+#### 10. What is the purpose of terraform import?
 
   - terraform import allows existing infrastructure to be brought under Terraform management without recreating resources.
     ~~~
@@ -54,7 +74,7 @@
     - It imports the resource into Terraform state file (terraform.tfstate), but does not generate the resource code (HCL) for you.
     - After import, you must manually define the corresponding resource in .tf files matching the existing setup.
 
-#### 9. What are Modules in Terraform?
+#### 11. What are Modules in Terraform?
 
   - Modules are reusable Terraform configurations. They enable code reusability, maintainability, and scalability.
     ~~~
@@ -63,7 +83,7 @@
       }
     ~~~
 
-#### 10. Difference between count and for_each in Terraform?
+#### 12. Difference between count and for_each in Terraform?
 
   - *count:* Used to create multiple resources based on a number.
     
@@ -93,15 +113,15 @@
         }
       ~~~
 
-#### 11. Can you explain depends_on in Terraform?
+#### 13. Can you explain depends_on in Terraform?
 
   - depends_on is used to specify explicit dependencies between resources when implicit dependency cannot be derived by Terraform.
 
-#### 12. How does Terraform handle drift?
+#### 14. How does Terraform handle drift?
 
   - Terraform detects drift when you run terraform plan. If any resource has been changed outside of Terraform, it will show the differences and optionally correct them.
     
-#### 13. What is a Data Source in Terraform?
+#### 15. What is a Data Source in Terraform?
 
   - Data sources allow Terraform to fetch data from external resources or APIs for use in the configuration without managing them.
     ~~~
@@ -143,31 +163,31 @@
       }
     ~~~
     
-#### 14. What happens if your terraform apply fails in the middle?
+#### 16. What happens if your terraform apply fails in the middle?
 
   - Partial changes may occur. Terraform records what was successfully applied and what failed. On the next run, Terraform will attempt to continue or correct based on the state file.
 
-#### 15. How do you upgrade Terraform providers?
+#### 17. How do you upgrade Terraform providers?
 
   - Update the required_providers block and run:
     ~~~
       $ terraform init -upgrade
     ~~~
 
-#### 16. What is the difference between local-exec and remote-exec provisioners?
+#### 18. What is the difference between local-exec and remote-exec provisioners?
   
   - **local-exec:** Runs commands on the machine running Terraform.
   - **remote-exec:** Runs commands on the target remote resource.
 
-#### 17. Explain the concept of workspaces in Terraform.
+#### 19. Explain the concept of workspaces in Terraform.
   
   - Workspaces allow you to manage multiple state files for the same configuration, useful for managing environments like dev, staging, and prod.
 
-#### 18. What is the use of the terraform validate command?
+#### 20. What is the use of the terraform validate command?
 
   - It validates the configuration files for syntax errors and correctness.
 
-#### 19. Can you explain backend in Terraform?
+#### 21. Can you explain backend in Terraform?
 
   - Backend defines where Terraform state is stored (local, S3, Terraform Cloud, etc.)
   ~~~
