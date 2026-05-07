@@ -210,4 +210,18 @@
     }
   }
 
+#### 22. How do you prevent accidental deletion of production resources?
+
+	1. Terraform prevent_destroy
+
+		lifecycle {
+		  prevent_destroy = true
+		}
+
+	2. CI/CD-only Terraform access
+
+	3. Mandatory plan review
+	
+	4. Manual approval gates for production
+
   ~~~
